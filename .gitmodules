@@ -1,0 +1,8 @@
+[submodule "Console/Common"]
+	path = Console/Common
+	url = https://github.com/Diogo-Maia/LP2_RockPaperScissor.git
+	branch = common
+[submodule "Unity/Assets/Scripts/Common"]
+	path = Unity/Assets/Scripts/Common
+	url = https://github.com/Diogo-Maia/LP2_RockPaperScissor.git
+	branch = common

@@ -1,5 +1,9 @@
 # Projeto de Recurso de LPII 2020/2021
 
+```
+git clone --recurse-submodules https://github.com/Diogo-Maia/LP2_RockPaperScissor.git
+```
+
 ## Autores
 
 * [Diana Nóia](https://github.com/diananoia), a21703004

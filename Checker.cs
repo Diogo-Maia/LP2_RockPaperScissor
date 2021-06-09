@@ -2,7 +2,7 @@
 
 namespace LP2_RockPaperScissor.Common
 {
-    class Checker
+    public class Checker
     {
         private int xdim, ydim;
         private double swap_rate_exp, repr_rate_exp, selc_rate_exp;

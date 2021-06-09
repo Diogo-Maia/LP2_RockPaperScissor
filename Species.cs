@@ -1,6 +1,6 @@
 ﻿namespace LP2_RockPaperScissor.Common
 {
-    enum Species
+    public enum Species
     {
         Rock,
         Paper,

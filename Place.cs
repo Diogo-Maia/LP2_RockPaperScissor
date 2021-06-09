@@ -1,9 +1,9 @@
 ﻿namespace LP2_RockPaperScissor.Common
 {
-    class Place
+    public class Place
     {
-        public Species Specie { get; }
+        private Species specie;
 
-        public Place(Species specie) => Specie = specie;
+        public Place(Species specie) => this.specie = specie;
     }
 }

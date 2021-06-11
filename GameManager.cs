@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LP2_RockPaperScissor.Common
 {
@@ -28,6 +29,15 @@ namespace LP2_RockPaperScissor.Common
 
             FillMap();
             ui.MapView(map, xdim, ydim);
+
+            //Loop so ca esta para ver o swap a funcionar
+            while (true)
+            {
+                Console.Clear();
+                map[1, 1].Swap(map, 1, 1, xdim, ydim);
+                ui.MapView(map, xdim, ydim);
+                System.Threading.Thread.Sleep(500);
+            }
         }
 
         private void FillMap()
@@ -54,6 +64,29 @@ namespace LP2_RockPaperScissor.Common
                 2 => Species.Scissor,
                 _ => Species.Empty,
             };
+        }
+
+        private List<char> FisherYates(List<char> toShuffle)
+        {
+            List<char> shuffle = new List<char>();
+            Random rdn = new Random();
+            List<int> n = new List<int>();
+
+            for (int i = 0; i < toShuffle.Count; i++)
+            {
+                int j;
+                do
+                {
+                    j = rdn.Next(0, toShuffle.Count);
+
+                } while (n.Contains(j));
+
+                n.Add(j);
+                shuffle.Add(toShuffle[j]);
+            }
+            shuffle.Reverse();
+
+            return shuffle;
         }
     }
 }

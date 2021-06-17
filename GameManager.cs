@@ -34,7 +34,8 @@ namespace LP2_RockPaperScissor.Common
             while (true)
             {
                 Console.Clear();
-                map[1, 1].Swap(map, 1, 1, xdim, ydim);
+                //map[1, 1].Swap(map, 1, 1, xdim, ydim);
+                map[1, 1].Reproduction(map, 1, 1, xdim, ydim);
                 ui.MapView(map, xdim, ydim);
                 System.Threading.Thread.Sleep(500);
             }

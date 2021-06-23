@@ -89,5 +89,21 @@ namespace LP2_RockPaperScissor.Common
 
             return shuffle;
         }
+
+        private int Poisson(double lambda)
+        {
+            Random rdn = new Random();
+            double l = Math.Exp(-lambda);
+            double p = 1.0;
+            int k = 0;
+
+            do
+            {
+                k++;
+                p *= rdn.NextDouble();
+            } while (p > l);
+
+            return k - 1;
+        }
     }
 }

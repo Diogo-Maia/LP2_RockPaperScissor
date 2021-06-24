@@ -30,12 +30,28 @@ namespace LP2_RockPaperScissor.Common
         public void Selection(Place[,] map, int x, int y, int xdim, int ydim)
         {
             Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
-            if (selected[0].GetSpecie() == Species.Paper && selected[1].GetSpecie() == Species.Rock) selected[1].SetSpecie(Species.Empty);
-            else if (selected[0].GetSpecie() == Species.Rock && selected[1].GetSpecie() == Species.Paper) selected[0].SetSpecie(Species.Empty);
-            else if (selected[0].GetSpecie() == Species.Rock && selected[1].GetSpecie() == Species.Scissor) selected[1].SetSpecie(Species.Empty);
-            else if (selected[0].GetSpecie() == Species.Scissor && selected[1].GetSpecie() == Species.Rock) selected[0].SetSpecie(Species.Empty);
-            else if (selected[0].GetSpecie() == Species.Scissor && selected[1].GetSpecie() == Species.Paper) selected[1].SetSpecie(Species.Empty);
-            else if (selected[0].GetSpecie() == Species.Paper && selected[1].GetSpecie() == Species.Scissor) selected[0].SetSpecie(Species.Empty);
+            switch (selected[0].specie)
+            {
+                case Species.Rock:
+                    if (selected[1].specie == Species.Paper)
+                        selected[0].specie = Species.Empty;
+                    else if (selected[1].specie == Species.Scissor)
+                        selected[1].specie = Species.Empty;
+                    break;
+                case Species.Paper:
+                    if (selected[1].specie == Species.Scissor)
+                        selected[0].specie = Species.Empty;
+                    else if (selected[1].specie == Species.Rock)
+                        selected[1].specie = Species.Empty;
+                    break;
+                case Species.Scissor:
+                    if (selected[1].specie == Species.Rock)
+                        selected[0].specie = Species.Empty;
+                    else if (selected[1].specie == Species.Paper)
+                        selected[1].specie = Species.Empty;
+                    break;
+
+            }
         }
 
         private Place[] GetRandomPlaces(

@@ -23,17 +23,8 @@ namespace LP2_RockPaperScissor.Common
         public void Reproduction(Place[,] map, int x, int y, int xdim, int ydim)
         {
             Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
-            Species sp = selected[0].GetSpecie();
-            Species sp1 = selected[1].GetSpecie();
-
-            if (sp == Species.Empty && sp1 != Species.Empty)
-            {
-                selected[0].SetSpecie(selected[1].GetSpecie());
-            }
-            else if (sp != Species.Empty && sp1 == Species.Empty)
-            {
-                selected[1].SetSpecie(selected[0].GetSpecie());
-            }
+            if (selected[0].GetSpecie() == Species.Empty) selected[0].SetSpecie(selected[1].specie);
+            else if (selected[1].GetSpecie() == Species.Empty) selected[1].SetSpecie(selected[0].specie);
         }
 
         public void Selection(Place[,] map, int x, int y, int xdim, int ydim)

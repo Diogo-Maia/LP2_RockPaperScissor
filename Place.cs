@@ -30,7 +30,12 @@ namespace LP2_RockPaperScissor.Common
         public void Selection(Place[,] map, int x, int y, int xdim, int ydim)
         {
             Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
-
+            if (selected[0].GetSpecie() == Species.Paper && selected[1].GetSpecie() == Species.Rock) selected[1].SetSpecie(Species.Empty);
+            else if (selected[0].GetSpecie() == Species.Rock && selected[1].GetSpecie() == Species.Paper) selected[0].SetSpecie(Species.Empty);
+            else if (selected[0].GetSpecie() == Species.Rock && selected[1].GetSpecie() == Species.Scissor) selected[1].SetSpecie(Species.Empty);
+            else if (selected[0].GetSpecie() == Species.Scissor && selected[1].GetSpecie() == Species.Rock) selected[0].SetSpecie(Species.Empty);
+            else if (selected[0].GetSpecie() == Species.Scissor && selected[1].GetSpecie() == Species.Paper) selected[1].SetSpecie(Species.Empty);
+            else if (selected[0].GetSpecie() == Species.Paper && selected[1].GetSpecie() == Species.Scissor) selected[0].SetSpecie(Species.Empty);
         }
 
         private Place[] GetRandomPlaces(

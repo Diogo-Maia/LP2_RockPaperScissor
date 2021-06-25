@@ -1,15 +1,13 @@
-﻿using LP2_RockPaperScissor.Common;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Checker check = new Checker();
+            Controller c = new Controller();
             View ui = new View();
 
-            if (check.CheckVars(args)) check.StartGame(ui);
+            if (c.CheckVars(args)) c.StartGame(ui);
         }
     }
 }

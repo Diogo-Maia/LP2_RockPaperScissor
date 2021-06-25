@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LP2_RockPaperScissor.Common
 {
-    class GameManager
+    public class GameManager
     {
         private int xdim, ydim;
         private double swap_rate_exp, repr_rate_exp, selc_rate_exp;

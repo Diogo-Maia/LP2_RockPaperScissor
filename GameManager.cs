@@ -67,6 +67,28 @@ namespace LP2_RockPaperScissor.Common
             };
         }
 
+        private List<Events> GenerateEvents()
+        {
+            double lambda = (xdim * ydim / 3.0) * Math.Pow(10, swap_rate_exp);
+            List<Events> events = new List<Events>();
+            for (int i = 0; i < Poisson(lambda); i++)
+            {
+                events.Add(Events.Swap);
+            }
+            lambda = (xdim * ydim / 3.0) * Math.Pow(10, repr_rate_exp);
+            for (int i = 0; i < Poisson(lambda); i++)
+            {
+                events.Add(Events.Reproduction);
+            }
+            lambda = (xdim * ydim / 3.0) * Math.Pow(10, selc_rate_exp);
+            for (int i = 0; i < Poisson(lambda); i++)
+            {
+                events.Add(Events.Selection);
+            }
+
+            return events;
+        }
+
         private List<char> FisherYates(List<char> toShuffle)
         {
             List<char> shuffle = new List<char>();

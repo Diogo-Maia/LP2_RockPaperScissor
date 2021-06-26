@@ -13,19 +13,35 @@ namespace ConsoleApp
 
         public bool CheckVars(string[] args)
         {
-            if (args.Length > 5) return false;
+            if (args.Length >= 5) return false;
 
             if (!int.TryParse(args[0], NumberStyles.Any,
                 CultureInfo.InvariantCulture, out xdim)) return false;
+
+            if (xdim < 2) return false;
+
             if (!int.TryParse(args[1], NumberStyles.Any,
                 CultureInfo.InvariantCulture, out ydim)) return false;
 
+            if (ydim < 2) return false;
+
             if (!double.TryParse(args[2], NumberStyles.Any,
                 CultureInfo.InvariantCulture, out swap_rate_exp)) return false;
+
+            if (swap_rate_exp < -1.0 && swap_rate_exp > 1.0)
+                return false;
+
             if (!double.TryParse(args[3], NumberStyles.Any,
                 CultureInfo.InvariantCulture, out repr_rate_exp)) return false;
+
+            if (repr_rate_exp < -1.0 && repr_rate_exp > 1.0)
+                return false;
+
             if (!double.TryParse(args[4], NumberStyles.Any,
                 CultureInfo.InvariantCulture, out selc_rate_exp)) return false;
+
+            if (selc_rate_exp < -1.0 && selc_rate_exp > 1.0)
+                return false;
 
             return true;
         }

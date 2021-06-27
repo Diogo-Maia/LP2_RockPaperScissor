@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp
+﻿using System;
+
+namespace ConsoleApp
 {
     class Program
     {
@@ -7,7 +9,10 @@
             Controller c = new Controller();
             View ui = new View();
 
-            if (c.CheckVars(args)) c.StartGame(ui);
+            string status = c.CheckVars(args);
+
+            if (status == null) c.StartGame(ui);
+            else Console.WriteLine(status);
         }
     }
 }

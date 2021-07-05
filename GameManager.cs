@@ -32,7 +32,6 @@ namespace LP2_RockPaperScissor.Common
         {
             while (true)
             {
-                Console.Clear();
                 ExecuteEvents(GenerateEvents());
 
                 ui.MapView(map, xdim, ydim);

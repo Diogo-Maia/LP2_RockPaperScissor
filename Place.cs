@@ -67,19 +67,19 @@ namespace LP2_RockPaperScissor.Common
             {
                 case 0:
                     selected =
-                        map[y + 1 >= ydim ? 0 : y + 1, x];
+                        map[x ,y + 1 >= ydim ? 0 : y + 1];
                     break;
                 case 1:
                     selected =
-                        map[y, x + 1 >= xdim ? 0 : x + 1];
+                        map[x + 1 >= xdim ? 0 : x + 1, y];
                     break;
                 case 2:
                     selected =
-                        map[y - 1 < 0 ? ydim - 1 : y - 1, x];
+                        map[x, y - 1 < 0 ? ydim - 1 : y - 1];
                     break;
                 case 3:
                     selected =
-                        map[y, x - 1 < 0 ? xdim - 1 : x - 1];
+                        map[x - 1 < 0 ? xdim - 1: x - 1, y];
                     break;
                 default:
                     selected = new Place(Species.Empty);

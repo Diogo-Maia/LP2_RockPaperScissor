@@ -35,7 +35,6 @@ namespace LP2_RockPaperScissor.Common
                 ExecuteEvents(GenerateEvents());
 
                 ui.MapView(map, xdim, ydim);
-                System.Threading.Thread.Sleep(500);
             }
         }
 
@@ -94,8 +93,8 @@ namespace LP2_RockPaperScissor.Common
             int r_y;
             foreach (Events e in events)
             {
-                r_x = rdn.Next(0, xdim - 1);
-                r_y = rdn.Next(0, ydim - 1);
+                r_x = rdn.Next(0, xdim);
+                r_y = rdn.Next(0, ydim);
                 switch (e)
                 {
                     case Events.Swap:

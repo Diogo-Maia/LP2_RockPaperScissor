@@ -9,6 +9,7 @@ namespace LP2_RockPaperScissor.Common
         private readonly double swap_rate_exp, repr_rate_exp, selc_rate_exp;
 
         private readonly Place[,] map;
+        private Random rdn;
 
         public GameManager(int xdim, int ydim,
             double swap_rate_exp, double repr_rate_exp, double selc_rate_exp)
@@ -20,6 +21,7 @@ namespace LP2_RockPaperScissor.Common
             this.selc_rate_exp = selc_rate_exp;
 
             map = new Place[xdim, ydim];
+            rdn = new Random();
         }
 
         public void Start(IView ui)
@@ -51,8 +53,6 @@ namespace LP2_RockPaperScissor.Common
 
         private Species PlaceSpecie()
         {
-            Random rdn = new Random();
-
             int i = rdn.Next(0, 4);
 
             return i switch

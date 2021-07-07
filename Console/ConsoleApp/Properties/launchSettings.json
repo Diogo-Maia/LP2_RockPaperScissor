@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "50 50 1.0 1.0 1.0"
+      "commandLineArgs": "50 40 1.0 1.0 1.0"
     }
   }
 }

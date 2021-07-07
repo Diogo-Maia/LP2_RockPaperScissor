@@ -1,21 +1,25 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-public class SliderValueToText : MonoBehaviour
+namespace LP2_RockPaperScissor.UnityApp
 {
-    public Slider sliderUI;
-    private TMPro.TextMeshProUGUI textSliderValue;
-
-    void Start()
+    public class SliderValueToText : MonoBehaviour
     {
-        textSliderValue = GetComponent<TMPro.TextMeshProUGUI>();
-        ShowSliderValue();
-    }
+        [SerializeField]
+        private Slider sliderUI;
 
-    public void ShowSliderValue()
-    {
-        string sliderMessage = " " + sliderUI.value;
-        textSliderValue.text = sliderMessage;
+        private TMPro.TextMeshProUGUI textSliderValue;
+
+        void Start()
+        {
+            textSliderValue = GetComponent<TMPro.TextMeshProUGUI>();
+            ShowSliderValue();
+        }
+
+        public void ShowSliderValue()
+        {
+            string sliderMessage = " " + sliderUI.value;
+            textSliderValue.text = sliderMessage;
+        }
     }
 }

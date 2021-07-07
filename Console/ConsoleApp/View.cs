@@ -7,6 +7,7 @@ namespace ConsoleApp
     {
         public void MapView(Place[,] map, int xdim, int ydim)
         {
+            Console.Clear();
             for (int x = 0; x < xdim; x++)
             {
                 for (int y = 0; y < ydim; y++)
@@ -30,10 +31,13 @@ namespace ConsoleApp
                             Console.Write("■ ");
                             break;
                     }
+                    
                 }
-                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
             }
+            System.Threading.Thread.Sleep(500);
+            Console.ForegroundColor = ConsoleColor.White;
+            
         }
     }
 }

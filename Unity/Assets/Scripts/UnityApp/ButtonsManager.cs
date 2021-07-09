@@ -14,16 +14,23 @@ public class ButtonsManager : MonoBehaviour
     [SerializeField] private Slider sele;
 
     [SerializeField] private View ui;
+    
+    [SerializeField] private GameObject pauseText;
+    [SerializeField] private GameObject continueText;
 
     private Controller c;
     private string[] args;
 
     private Thread thread;
 
+    private bool isPaused;
+
     private void Start()
     {
         c = new Controller();
-        thread = new Thread(StartGame);
+        isPaused = false;
+        pauseText.SetActive(true);
+        continueText.SetActive(false);
     }
 
     public void OnStartClick()
@@ -31,19 +38,54 @@ public class ButtonsManager : MonoBehaviour
         args = ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
         string result = c.CheckVars(args);
         if (result == null)
+        {
+            thread = new Thread(StartGame);
             thread.Start();
+        }
         else Debug.Log(result);
     }
 
-    private string[] ToArray(string x, string y, double swap, double repr, double sele)
+    private string[] ToArray(string x, string y, double swap, double repr,
+        double sele)
     {
-        return new string[] { x, y, Convert.ToString(swap), Convert.ToString(repr), Convert.ToString(sele) };
+        return new string[] { x, y, Convert.ToString(swap),
+            Convert.ToString(repr), Convert.ToString(sele) };
     }
 
     private void StartGame()
     {
-        Debug.Log("");
         c.StartGame(ui);
+    }
+
+    public void OnPauseClick()
+    {
+        if (!isPaused)
+        {
+            thread.Suspend();
+            pauseText.SetActive(false);
+            continueText.SetActive(true);
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+        else
+        {
+            thread.Resume();
+            pauseText.SetActive(true);
+            continueText.SetActive(false);
+            Time.timeScale = 1;
+            isPaused = false;
+        }
+        
+    }
+
+    public void OnStopClick()
+    {
+    }
+
+    public void OnQuitClick()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 }
 

@@ -20,7 +20,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         // Update is called once per frame
-        void LateUpdate()
+        void Update()
         {
             if (v.map != null) 
             {

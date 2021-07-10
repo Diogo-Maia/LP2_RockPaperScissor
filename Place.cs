@@ -5,8 +5,14 @@ namespace LP2_RockPaperScissor.Common
     public class Place
     {
         private Species specie;
+        private Random rdn;
 
-        public Place(Species specie) => this.specie = specie;
+        public Place(Species specie)
+        {
+            this.specie = specie;
+
+            rdn = new Random();
+        }
 
         public Species GetSpecie() => specie;
 
@@ -21,12 +27,15 @@ namespace LP2_RockPaperScissor.Common
             selected[1].SetSpecie(sp);
         }
 
-        public void Reproduction(Place[,] map, int x, int y, int xdim, int ydim)
+        public void Reproduction
+            (Place[,] map, int x, int y, int xdim, int ydim)
         {
             Place[] selected = 
                 { map[x, y], GetRandomPlaces(map, x, y, xdim, ydim) };
-            if (selected[0].GetSpecie() == Species.Empty) selected[0].SetSpecie(selected[1].specie);
-            else if (selected[1].GetSpecie() == Species.Empty) selected[1].SetSpecie(selected[0].specie);
+            if (selected[0].GetSpecie() == Species.Empty) 
+                selected[0].SetSpecie(selected[1].specie);
+            else if (selected[1].GetSpecie() == Species.Empty) 
+                selected[1].SetSpecie(selected[0].specie);
         }
 
         public void Selection(Place[,] map, int x, int y, int xdim, int ydim)
@@ -60,7 +69,6 @@ namespace LP2_RockPaperScissor.Common
         private Place GetRandomPlaces(
             Place[,] map, int x, int y, int xdim, int ydim)
         {
-            Random rdn = new Random();
             Place selected;
 
             switch (rdn.Next(0, 5))

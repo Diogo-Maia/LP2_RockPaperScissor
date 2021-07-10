@@ -88,7 +88,6 @@ namespace LP2_RockPaperScissor.Common
 
         private void ExecuteEvents(List<Events> events)
         {
-            Random rdn = new Random();
             int r_x;
             int r_y;
             foreach (Events e in events)
@@ -113,7 +112,6 @@ namespace LP2_RockPaperScissor.Common
         private List<Events> FisherYates(List<Events> toShuffle)
         {
             List<Events> shuffle = new List<Events>();
-            Random rdn = new Random();
             List<int> n = new List<int>();
 
             for (int i = 0; i < toShuffle.Count; i++)
@@ -135,7 +133,6 @@ namespace LP2_RockPaperScissor.Common
 
         private int Poisson(double lambda)
         {
-            Random rdn = new Random();
             double l = Math.Exp(-lambda);
             double p = 1.0;
             int k = 0;

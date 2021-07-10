@@ -35,22 +35,19 @@ public class ButtonsManager : MonoBehaviour
 
     public void OnStartClick()
     {
-        args = ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
+        args = 
+            ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
         string result = c.CheckVars(args);
         if (result == null)
         {
             thread = new Thread(StartGame);
             thread.Start();
         }
-        else Debug.Log(result);
     }
 
     private string[] ToArray(string x, string y, double swap, double repr,
-        double sele)
-    {
-        return new string[] { x, y, Convert.ToString(swap),
+        double sele) => new string[] { x, y, Convert.ToString(swap),
             Convert.ToString(repr), Convert.ToString(sele) };
-    }
 
     private void StartGame()
     {
@@ -80,11 +77,11 @@ public class ButtonsManager : MonoBehaviour
 
     public void OnStopClick()
     {
+        thread.Abort();
     }
 
     public void OnQuitClick()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 }

@@ -9,6 +9,7 @@ namespace LP2_RockPaperScissor.UnityApp
         private Slider sliderUI;
 
         private TMPro.TextMeshProUGUI textSliderValue;
+        private string sliderMessage;
 
         void Start()
         {
@@ -18,7 +19,7 @@ namespace LP2_RockPaperScissor.UnityApp
 
         public void ShowSliderValue()
         {
-            string sliderMessage = " " + sliderUI.value;
+            sliderMessage = " " + sliderUI.value;
             textSliderValue.text = sliderMessage;
         }
     }

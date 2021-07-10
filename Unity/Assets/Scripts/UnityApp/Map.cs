@@ -10,13 +10,12 @@ namespace LP2_RockPaperScissor.UnityApp
 
         private View v;
 
-        private Texture2D Tmap;
+        private Texture2D texture;
 
         // Start is called before the first frame update
         void Start()
         {
             v = GetComponent<View>();
-            Tmap = new Texture2D(100, 100);
         }
 
         // Update is called once per frame
@@ -24,36 +23,40 @@ namespace LP2_RockPaperScissor.UnityApp
         {
             if (v.map != null) 
             {
-                Tmap = new Texture2D(v.xdim, v.ydim);
-                for (int x = 0; x < v.map.GetLength(0); x++)
+                if (texture != null)
                 {
-                    for (int y = 0; y < v.map.GetLength(1); y++)
+                    for (int x = 0; x < v.map.GetLength(0); x++)
                     {
-                        //Debug.Log(v.map[x, y].GetSpecie());
-                        switch (v.map[x, y].GetSpecie())
+                        for (int y = 0; y < v.map.GetLength(1); y++)
                         {
-                            case Species.Rock:
-                                //Map[x, y] = Color.blue;
-                                Tmap.SetPixel(x, y, Color.blue);
-                                break;
-                            case Species.Paper:
-                                //Map[x, y] = Color.green;
-                                Tmap.SetPixel(x, y, Color.green);
-                                break;
-                            case Species.Scissor:
-                                //Map[x, y] = Color.red;
-                                Tmap.SetPixel(x, y, Color.red);
-                                break;
-                            case Species.Empty:
-                                //Map[x, y] = Color.black;
-                                Tmap.SetPixel(x, y, Color.black);
-                                break;
+                            switch (v.map[x, y].GetSpecie())
+                            {
+                                case Species.Rock:
+                                    texture.SetPixel(x, y, Color.blue);
+                                    break;
+                                case Species.Paper:
+                                    texture.SetPixel(x, y, Color.green);
+                                    break;
+                                case Species.Scissor:
+                                    texture.SetPixel(x, y, Color.red);
+                                    break;
+                                case Species.Empty:
+                                    texture.SetPixel(x, y, Color.black);
+                                    break;
+                            }
+                            texture.Apply();
+                            rawImage.texture = texture;
                         }
-                        Tmap.Apply();
-                        rawImage.texture = Tmap;
                     }
                 }
-            }            
+                else CreateTexture();
+            }
+        }
+
+        private void CreateTexture()
+        {
+            texture = new Texture2D(v.xdim, v.ydim);
+            texture.filterMode = FilterMode.Point;
         }
     }
 }

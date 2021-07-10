@@ -13,7 +13,6 @@ namespace LP2_RockPaperScissor.UnityApp
             this.map = map;
             this.xdim = xdim;
             this.ydim = ydim;
-            
         }
     }
 }

@@ -3,14 +3,39 @@ using System.Collections.Generic;
 
 namespace LP2_RockPaperScissor.Common
 {
+    /// <summary>
+    /// Classe GameManager
+    /// </summary>
     public class GameManager
     {
+        /// <summary>
+        /// Números inteiros que representam as dimensões horizontal e vertical 
+        /// da grelha de simulação
+        /// </summary>
         private int xdim, ydim;
+        /// <summary>
+        /// Números reais entre -1.0 e 1-0 que represetam, respectivamente, a 
+        /// taxa dos eventos de troca, de reprodução e de seleção
+        /// </summary>
         private double swap_rate_exp, repr_rate_exp, selc_rate_exp;
 
+        /// <summary>
+        /// Array das posições na grelha da simulação
+        /// </summary>
         private Place[,] map;
+        /// <summary>
+        /// 
+        /// </summary>
         private IView ui;
 
+        /// <summary>
+        /// Construtor da classe GameManager
+        /// </summary>
+        /// <param name="xdim">Dimensão horizontal da grelha</param>
+        /// <param name="ydim">Dimensão vertical da grelha</param>
+        /// <param name="swap_rate_exp">Taxa dos eventos de troca</param>
+        /// <param name="repr_rate_exp">Taxa dos eventos de reprodução</param>
+        /// <param name="selc_rate_exp">Taxa dos eventos de Seleção</param>
         public GameManager(int xdim, int ydim,
             double swap_rate_exp, double repr_rate_exp, double selc_rate_exp)
         {
@@ -23,6 +48,10 @@ namespace LP2_RockPaperScissor.Common
             map = new Place[xdim, ydim];
         }
 
+        /// <summary>
+        /// Método Start
+        /// </summary>
+        /// <param name="ui"></param>
         public void Start(IView ui)
         {
             this.ui = ui;
@@ -30,7 +59,7 @@ namespace LP2_RockPaperScissor.Common
             FillMap();
             ui.MapView(map, xdim, ydim);
 
-            //Loop so ca esta para ver o swap a funcionar
+            //Loop so cá está para ver o swap a funcionar
             while (true)
             {
                 Console.Clear();
@@ -41,6 +70,9 @@ namespace LP2_RockPaperScissor.Common
             }
         }
 
+        /// <summary>
+        /// Método FillMap
+        /// </summary>
         private void FillMap()
         {
             for (int x = 0; x < xdim; x++)
@@ -52,6 +84,10 @@ namespace LP2_RockPaperScissor.Common
             }
         }
 
+        /// <summary>
+        /// Método PlaceSpecie
+        /// </summary>
+        /// <returns></returns>
         private Species PlaceSpecie()
         {
             Random rdn = new Random();
@@ -67,6 +103,10 @@ namespace LP2_RockPaperScissor.Common
             };
         }
 
+        /// <summary>
+        /// Método GeneratEvents do tipo List<Events>
+        /// </summary>
+        /// <returns></returns>
         private List<Events> GenerateEvents()
         {
             double lambda = (xdim * ydim / 3.0) * Math.Pow(10, swap_rate_exp);
@@ -89,6 +129,11 @@ namespace LP2_RockPaperScissor.Common
             return events;
         }
 
+        /// <summary>
+        /// Método FisherYates do tipo List<char>
+        /// </summary>
+        /// <param name="toShuffle"></param>
+        /// <returns></returns>
         private List<char> FisherYates(List<char> toShuffle)
         {
             List<char> shuffle = new List<char>();
@@ -112,6 +157,11 @@ namespace LP2_RockPaperScissor.Common
             return shuffle;
         }
 
+        /// <summary>
+        /// Método Poisson,
+        /// </summary>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
         private int Poisson(double lambda)
         {
             Random rdn = new Random();

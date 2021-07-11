@@ -11,13 +11,18 @@ namespace LP2_RockPaperScissor.Common
         /// Variável specie do tipo Species 
         /// </summary>
         private Species specie;
+        private Random rdn;
 
         /// <summary>
         /// Construtor da classe Place
         /// </summary>
-        /// <param name="specie">Aceita uma variável specie do Tipo Species
-        /// </param>
-        public Place(Species specie) => this.specie = specie;
+        /// <param name="specie">Variável specie do Tipo Species</param>
+        public Place(Species specie)
+        {
+            this.specie = specie;
+
+            rdn = new Random();
+        }
 
         /// <summary>
         /// Método que seleciona a próxima specie a ser mudada
@@ -42,13 +47,8 @@ namespace LP2_RockPaperScissor.Common
         /// <param name="ydim">Dimensão vertical da grelha</param>
         public void Swap(Place[,] map, int x, int y, int xdim, int ydim)
         {
-            // Array que vai receber uma posição aleatória
-            Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
-
-            // Seleciona uma posição, vê que specie está nessa posição, muda
-            // essa specie para a specie da célula vizinha selecionada, e por
-            // fim muda a specie da célula vizinha para a specie da célula 
-            // incial
+            Place[] selected =
+                { map[x, y], GetRandomPlaces(map, x, y, xdim, ydim) };
             Species sp = selected[0].GetSpecie();
             selected[0].SetSpecie(selected[1].GetSpecie());
             selected[1].SetSpecie(sp);
@@ -64,20 +64,21 @@ namespace LP2_RockPaperScissor.Common
         /// <param name="y">Posição em y</param>
         /// <param name="xdim">Dimensão horizontal da grelha</param>
         /// <param name="ydim">Dimensão vertical da grelha</param>
-        public void Reproduction(
-            Place[,] map, int x, int y, int xdim, int ydim)
+        public void Reproduction
+            (Place[,] map, int x, int y, int xdim, int ydim)
         {
             // Array que vai receber uma posição aleatória
-            Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
+            Place[] selected =
+                { map[x, y], GetRandomPlaces(map, x, y, xdim, ydim) };
 
             // Verifica se a célula selecionada está vazia, e se estiver atribui
             // a specie da célula vizinha selecionada. A mesma verificação
             // acontece para ver se a célula vizinha está vazia, e se estiver é 
             // atribuida a specie da célula original selecionada
-            if (selected[0].GetSpecie() == Species.Empty) selected[0]
-                    .SetSpecie(selected[1].specie);
-            else if (selected[1].GetSpecie() == Species.Empty) selected[1]
-                    .SetSpecie(selected[0].specie);
+            if (selected[0].GetSpecie() == Species.Empty)
+                selected[0].SetSpecie(selected[1].specie);
+            else if (selected[1].GetSpecie() == Species.Empty)
+                selected[1].SetSpecie(selected[0].specie);
         }
 
         /// <summary>
@@ -93,7 +94,8 @@ namespace LP2_RockPaperScissor.Common
         public void Selection(Place[,] map, int x, int y, int xdim, int ydim)
         {
             // Array que vai receber uma posição aleatória
-            Place[] selected = GetRandomPlaces(map, x, y, xdim, ydim);
+            Place[] selected =
+                { map[x, y], GetRandomPlaces(map, x, y, xdim, ydim) };
 
             // Switch que verifica a specie da célula selecionada e compara com
             // a specie da célula vizinha, para relaizar o jogo Pedra, Papel e
@@ -123,81 +125,41 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método GetRandomPlaces do tipo Place[], que 
+        /// 
         /// </summary>
         /// <param name="map">Mapa onde as posições são guardadas</param>
         /// <param name="x">Posição em x</param>
         /// <param name="y">Posição em y</param>
         /// <param name="xdim">Dimensão horizontal da grelha</param>
         /// <param name="ydim">Dimensão vertical da grelha</param>
-        /// <returns>Retorna a specie selecionada</returns>
-        private Place[] GetRandomPlaces(
+        /// <returns></returns>
+        private Place GetRandomPlaces(
             Place[,] map, int x, int y, int xdim, int ydim)
         {
-            //
-            Random rdn = new Random();
-            //
-            Place[] selected = new Place[2];
-            int n;
-            int i = 0;
-            int previous = default;
+            Place selected;
 
-            //
-            do
+            switch (rdn.Next(0, 5))
             {
-                if (i != 0)
-                {
-                    do
-                    {
-                        n = rdn.Next(0, 8);
-                    } while (n == previous);
-                }
-                n = rdn.Next(0, 8);
-                previous = n;
-
-                //
-                switch (n)
-                {
-                    case 0:
-                        selected[i] =
-                            map[y + 1 >= ydim ? 0 : y + 1, x];
-                        break;
-                    case 1:
-                        selected[i] =
-                            map[y + 1 >= ydim ? 0 : y + 1,
-                            x + 1 >= xdim ? 0 : x + 1];
-                        break;
-                    case 2:
-                        selected[i] =
-                            map[y, x + 1 >= xdim ? 0 : x + 1];
-                        break;
-                    case 3:
-                        selected[i] =
-                            map[y - 1 < 0 ? ydim - 1 : y - 1,
-                            x + 1 >= xdim ? 0 : x + 1];
-                        break;
-                    case 4:
-                        selected[i] =
-                            map[y - 1 < 0 ? ydim - 1 : y - 1, x];
-                        break;
-                    case 5:
-                        selected[i] =
-                            map[y - 1 < 0 ? ydim - 1 : y - 1,
-                            x - 1 < 0 ? xdim - 1 : x - 1];
-                        break;
-                    case 6:
-                        selected[i] =
-                            map[y, x - 1 < 0 ? xdim - 1 : x - 1];
-                        break;
-                    case 7:
-                        selected[i] =
-                            map[y + 1 >= ydim ? 0 : y + 1,
-                            x - 1 < 0 ? xdim - 1 : x - 1];
-                        break;
-                }
-                i++;
-            } while (i <= 1);
-
+                case 0:
+                    selected =
+                        map[x, y + 1 >= ydim ? 0 : y + 1];
+                    break;
+                case 1:
+                    selected =
+                        map[x + 1 >= xdim ? 0 : x + 1, y];
+                    break;
+                case 2:
+                    selected =
+                        map[x, y - 1 < 0 ? ydim - 1 : y - 1];
+                    break;
+                case 3:
+                    selected =
+                        map[x - 1 < 0 ? xdim - 1 : x - 1, y];
+                    break;
+                default:
+                    selected = new Place(Species.Empty);
+                    break;
+            }
             return selected;
         }
     }

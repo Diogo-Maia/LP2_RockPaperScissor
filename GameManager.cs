@@ -8,25 +8,11 @@ namespace LP2_RockPaperScissor.Common
     /// </summary>
     public class GameManager
     {
-        /// <summary>
-        /// Números inteiros que representam as dimensões horizontal e vertical 
-        /// da grelha de simulação
-        /// </summary>
-        private int xdim, ydim;
-        /// <summary>
-        /// Números reais entre -1.0 e 1-0 que represetam, respectivamente, a 
-        /// taxa dos eventos de troca, de reprodução e de seleção
-        /// </summary>
-        private double swap_rate_exp, repr_rate_exp, selc_rate_exp;
+        private readonly int xdim, ydim;
+        private readonly double swap_rate_exp, repr_rate_exp, selc_rate_exp;
 
-        /// <summary>
-        /// Array das posições na grelha da simulação
-        /// </summary>
-        private Place[,] map;
-        /// <summary>
-        /// 
-        /// </summary>
-        private IView ui;
+        private readonly Place[,] map;
+        private Random rdn;
 
         /// <summary>
         /// Construtor da classe GameManager
@@ -46,6 +32,7 @@ namespace LP2_RockPaperScissor.Common
             this.selc_rate_exp = selc_rate_exp;
 
             map = new Place[xdim, ydim];
+            rdn = new Random();
         }
 
         /// <summary>
@@ -54,19 +41,17 @@ namespace LP2_RockPaperScissor.Common
         /// <param name="ui"></param>
         public void Start(IView ui)
         {
-            this.ui = ui;
-
             FillMap();
-            ui.MapView(map, xdim, ydim);
+            GameLoop(ui);
+        }
 
-            //Loop so cá está para ver o swap a funcionar
+        private void GameLoop(IView ui)
+        {
             while (true)
             {
-                Console.Clear();
-                //map[1, 1].Swap(map, 1, 1, xdim, ydim);
-                map[1, 1].Reproduction(map, 1, 1, xdim, ydim);
+                ExecuteEvents(GenerateEvents());
+
                 ui.MapView(map, xdim, ydim);
-                System.Threading.Thread.Sleep(500);
             }
         }
 
@@ -90,8 +75,6 @@ namespace LP2_RockPaperScissor.Common
         /// <returns></returns>
         private Species PlaceSpecie()
         {
-            Random rdn = new Random();
-
             int i = rdn.Next(0, 4);
 
             return i switch
@@ -126,18 +109,35 @@ namespace LP2_RockPaperScissor.Common
                 events.Add(Events.Selection);
             }
 
-            return events;
+            return FisherYates(events);
         }
 
-        /// <summary>
-        /// Método FisherYates do tipo List<char>
-        /// </summary>
-        /// <param name="toShuffle"></param>
-        /// <returns></returns>
-        private List<char> FisherYates(List<char> toShuffle)
+        private void ExecuteEvents(List<Events> events)
         {
-            List<char> shuffle = new List<char>();
-            Random rdn = new Random();
+            int r_x;
+            int r_y;
+            foreach (Events e in events)
+            {
+                r_x = rdn.Next(0, xdim);
+                r_y = rdn.Next(0, ydim);
+                switch (e)
+                {
+                    case Events.Swap:
+                        map[r_x, r_y].Swap(map, r_x, r_y, xdim, ydim);
+                        break;
+                    case Events.Reproduction:
+                        map[r_x, r_y].Reproduction(map, r_x, r_y, xdim, ydim);
+                        break;
+                    case Events.Selection:
+                        map[r_x, r_y].Selection(map, r_x, r_y, xdim, ydim);
+                        break;
+                }
+            }
+        }
+
+        private List<Events> FisherYates(List<Events> toShuffle)
+        {
+            List<Events> shuffle = new List<Events>();
             List<int> n = new List<int>();
 
             for (int i = 0; i < toShuffle.Count; i++)
@@ -164,7 +164,6 @@ namespace LP2_RockPaperScissor.Common
         /// <returns></returns>
         private int Poisson(double lambda)
         {
-            Random rdn = new Random();
             double l = Math.Exp(-lambda);
             double p = 1.0;
             int k = 0;

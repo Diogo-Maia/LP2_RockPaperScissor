@@ -5,7 +5,7 @@
     /// </summary>
     public interface IController
     {
-        bool CheckVars(string[] args);
+        string CheckVars(string[] args);
         void StartGame(IView ui);
     }
 }

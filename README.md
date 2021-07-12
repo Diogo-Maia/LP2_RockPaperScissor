@@ -1,9 +1,5 @@
 # Projeto de Recurso de LPII 2020/2021
 
-```
-git clone --recurse-submodules https://github.com/Diogo-Maia/LP2_RockPaperScissor.git
-```
-
 ## Autores
 
 * [Diana Nóia](https://github.com/diananoia), a21703004
@@ -13,13 +9,25 @@ git clone --recurse-submodules https://github.com/Diogo-Maia/LP2_RockPaperScisso
 ## Repartição de Tarefas
 
 * Diana Nóia
-  *
+  * Reprodução das células
+  * Seleção das células
+  * UI do Unity
+  * Comentários XML
 
 * Diogo Maia
+  * Swap das células
+  * Vizinhança de Von Neumann
+  * Shuffle de FisherYates
+  * Poisson
   * 
 
 * Inês Gonçalves
-  * 
+  * Setup do repositório git
+  * Ajudou a fazer a reprodução das células
+  * Ajudou a fazer a seleção das células
+  * UI do Unity
+  * Relatório
+  * Doxigen
 
 ## Repositório
 

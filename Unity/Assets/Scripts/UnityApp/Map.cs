@@ -4,20 +4,40 @@ using LP2_RockPaperScissor.Common;
 
 namespace LP2_RockPaperScissor.UnityApp
 {
+    /// <summary>
+    /// Classe Map, implementa MonoBehaviour
+    /// </summary>
     public class Map : MonoBehaviour
     {
+        /// <summary>
+        /// Variável do tipo RawImage, usada para desenhar a grelha no canvas
+        /// do unity
+        /// </summary>
         [SerializeField] private RawImage rawImage;
 
+        /// <summary>
+        /// Variàvel do tipo View
+        /// </summary>
         private View v;
 
+        /// <summary>
+        /// Variável do tipo Texture2D, usada para desenhar a grelha no canvas
+        /// do unity
+        /// </summary>
         private Texture2D texture;
 
+        /// <summary>
+        /// Método Start, inicia a simulação
+        /// </summary>
         // Start is called before the first frame update
         void Start()
         {
             v = GetComponent<View>();
         }
 
+        /// <summary>
+        /// Método Update, atualiza cada frame da simulação
+        /// </summary>
         // Update is called once per frame
         void Update()
         {
@@ -53,6 +73,9 @@ namespace LP2_RockPaperScissor.UnityApp
             }
         }
 
+        /// <summary>
+        /// Método CreateTexture, desenha a textura numa RawImage do unity UI
+        /// </summary>
         private void CreateTexture()
         {
             texture = new Texture2D(v.xdim, v.ydim);

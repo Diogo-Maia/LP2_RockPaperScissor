@@ -2,14 +2,31 @@ using LP2_RockPaperScissor.Common;
 
 namespace LP2_RockPaperScissor.UnityApp
 {
+    /// <summary>
+    /// Classe Controller, implementa a interface IController
+    /// </summary>
     public class Controller : IController
     {
+        /// <summary>
+        /// Dimensões horizontal e vertical da grelha ed simulação
+        /// </summary>
         private int xdim, ydim;
+        /// <summary>
+        /// Taxa de troca, reprodução e seleção
+        /// </summary>
         private double swap_rate_exp, repr_rate_exp,
             selc_rate_exp;
 
+        /// <summary>
+        /// Variável do tipo GameManager
+        /// </summary>
         private GameManager game;
 
+        /// <summary>
+        /// Método CheckVars
+        /// </summary>
+        /// <param name="args">Array de strings que guarda valor inserido</param>
+        /// <returns>Retorna um valor null</returns>
         public string CheckVars(string[] args)
         {
             if (args.Length > 5)
@@ -51,6 +68,10 @@ namespace LP2_RockPaperScissor.UnityApp
             return null;
         }
 
+        /// <summary>
+        /// Método StartGame, corre quando a simulação é iniciada
+        /// </summary>
+        /// <param name="ui"></param>
         public void StartGame(IView ui)
         {
             game = new GameManager(xdim, ydim,

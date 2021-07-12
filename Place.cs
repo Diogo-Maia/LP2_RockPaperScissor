@@ -11,6 +11,9 @@ namespace LP2_RockPaperScissor.Common
         /// Variável specie do tipo Species 
         /// </summary>
         private Species specie;
+        /// <summary>
+        /// Variável do tipo random
+        /// </summary>
         private Random rdn;
 
         /// <summary>
@@ -125,14 +128,14 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// 
+        /// Método que seleciona uma posição random
         /// </summary>
         /// <param name="map">Mapa onde as posições são guardadas</param>
         /// <param name="x">Posição em x</param>
         /// <param name="y">Posição em y</param>
         /// <param name="xdim">Dimensão horizontal da grelha</param>
         /// <param name="ydim">Dimensão vertical da grelha</param>
-        /// <returns></returns>
+        /// <returns>Retorna uma célula selecionada</returns>
         private Place GetRandomPlaces(
             Place[,] map, int x, int y, int xdim, int ydim)
         {

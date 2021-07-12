@@ -8,10 +8,22 @@ namespace LP2_RockPaperScissor.Common
     /// </summary>
     public class GameManager
     {
+        /// <summary>
+        /// Dimensões da grelha
+        /// </summary>
         private readonly int xdim, ydim;
+        /// <summary>
+        /// Taxa de eventos
+        /// </summary>
         private readonly double swap_rate_exp, repr_rate_exp, selc_rate_exp;
 
+        /// <summary>
+        /// Array de posições do mapa
+        /// </summary>
         private readonly Place[,] map;
+        /// <summary>
+        /// Variável do tipo random
+        /// </summary>
         private Random rdn;
 
         /// <summary>
@@ -36,15 +48,19 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método Start
+        /// Método Start, inicia a simulação
         /// </summary>
-        /// <param name="ui"></param>
+        /// <param name="ui">Variável do UI</param>
         public void Start(IView ui)
         {
             FillMap();
             GameLoop(ui);
         }
 
+        /// <summary>
+        /// Método que faz o loop da simulação
+        /// </summary>
+        /// <param name="ui">Variável do UI</param>
         private void GameLoop(IView ui)
         {
             while (true)
@@ -56,7 +72,7 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método FillMap
+        /// Método FillMap, prenche o mapa
         /// </summary>
         private void FillMap()
         {
@@ -70,9 +86,9 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método PlaceSpecie
+        /// Método PlaceSpecie, coloca uma espécie random em cada célula
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Retorna uma espécie random</returns>
         private Species PlaceSpecie()
         {
             int i = rdn.Next(0, 4);
@@ -89,7 +105,7 @@ namespace LP2_RockPaperScissor.Common
         /// <summary>
         /// Método GeneratEvents do tipo List<Events>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Retorna uma lista de eventos baralhados</returns>
         private List<Events> GenerateEvents()
         {
             double lambda = (xdim * ydim / 3.0) * Math.Pow(10, swap_rate_exp);
@@ -112,6 +128,10 @@ namespace LP2_RockPaperScissor.Common
             return FisherYates(events);
         }
 
+        /// <summary>
+        /// Método que executa os eventos da lista de eventos baralhados
+        /// </summary>
+        /// <param name="events">Lista de eventos baralhados</param>
         private void ExecuteEvents(List<Events> events)
         {
             int r_x;
@@ -135,6 +155,11 @@ namespace LP2_RockPaperScissor.Common
             }
         }
 
+        /// <summary>
+        /// Método que baralha uma lista de eventos
+        /// </summary>
+        /// <param name="toShuffle"></param>
+        /// <returns>Retorna uma lista de eventos baralhados</returns>
         private List<Events> FisherYates(List<Events> toShuffle)
         {
             List<Events> shuffle = new List<Events>();
@@ -158,10 +183,10 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método Poisson,
+        /// Método Poisson, escolhe um número random
         /// </summary>
         /// <param name="lambda"></param>
-        /// <returns></returns>
+        /// <returns>Retorna um número random</returns>
         private int Poisson(double lambda)
         {
             double l = Math.Exp(-lambda);

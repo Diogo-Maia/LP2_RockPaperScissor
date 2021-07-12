@@ -86,7 +86,7 @@ namespace ConsoleApp
         /// <summary>
         /// Classe que inicia a simulação
         /// </summary>
-        /// <param name="ui"></param>
+        /// <param name="ui">Variável do UI</param>
         public void StartGame(IView ui)
         {
             game = new GameManager(xdim, ydim,

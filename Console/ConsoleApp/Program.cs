@@ -10,7 +10,7 @@ namespace ConsoleApp
         /// <summary>
         /// Método Main, inicia a simulação
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Array de strings</param>
         static void Main(string[] args)
         {
             Controller c = new Controller();

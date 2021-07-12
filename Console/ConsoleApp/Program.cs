@@ -2,8 +2,15 @@
 
 namespace ConsoleApp
 {
+    /// <summary>
+    /// Classe Program
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Método Main, inicia a simulação
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Controller c = new Controller();

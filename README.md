@@ -87,6 +87,8 @@ O UML deste projeto é o seguinte:
 
 [Stackoverflow](https://stackoverflow.com).
 
+[Vídeo MVC exemplo](https://www.youtube.com/watch?v=_z_iRUjmvzE).
+
 [Wikipédia da distribuição de Poisson](https://en.wikipedia.org/wiki/Poisson_distribution).
 
 [Wikipédia do embaralhamento de FisherYates](https://en.wikipedia.org/wiki/Fisher–Yates_shuffle).

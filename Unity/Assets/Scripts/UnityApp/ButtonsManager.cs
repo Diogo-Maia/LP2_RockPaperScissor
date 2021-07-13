@@ -5,150 +5,153 @@ using LP2_RockPaperScissor.UnityApp;
 using TMPro;
 using System;
 
-/// <summary>
-/// Classe Buttons Manager, implementa MonoBehaviour
-/// </summary>
-public class ButtonsManager : MonoBehaviour
+namespace LP2_RockPaperScissor.UnityApp
 {
     /// <summary>
-    /// Dimensão horizontal da grelha de simulação
+    /// Classe Buttons Manager, implementa MonoBehaviour
     /// </summary>
-    [SerializeField] private TextMeshProUGUI xdim;
-    /// <summary>
-    /// Dimensão vertical da grelha de simulação
-    /// </summary>
-    [SerializeField] private TextMeshProUGUI ydim;
-    /// <summary>
-    /// Taxa de troca
-    /// </summary>
-    [SerializeField] private Slider swap;
-    /// <summary>
-    /// Taxa de reprodução
-    /// </summary>
-    [SerializeField] private Slider repr;
-    /// <summary>
-    /// Taxa de seleção
-    /// </summary>
-    [SerializeField] private Slider sele;
-
-    /// <summary>
-    /// Variável de tipo view para UI
-    /// </summary>
-    [SerializeField] private View ui;
-    
-    /// <summary>
-    /// Variável de tipo GameObject para texto pausa do butão pausa
-    /// </summary>
-    [SerializeField] private GameObject pauseText;
-    /// <summary>
-    /// Variável de tipo GameObject para texto continue do butão pausa
-    /// </summary>
-    [SerializeField] private GameObject continueText;
-
-    /// <summary>
-    /// Variável do tipo Controller
-    /// </summary>
-    private Controller c;
-    /// <summary>
-    /// Array de argumentos
-    /// </summary>
-    private string[] args;
-
-    /// <summary>
-    /// Declara uma Thread 
-    /// </summary>
-    private Thread thread;
-
-    /// <summary>
-    /// Booleano que vai ser usado para colocar a simulção em pausa
-    /// </summary>
-    private bool isPaused;
-
-    /// <summary>
-    /// Método Start, primeiro método a correr quando se inicia a simulação
-    /// </summary>
-    private void Start()
+    public class ButtonsManager : MonoBehaviour
     {
-        c = new Controller();
-        isPaused = false;
-        pauseText.SetActive(true);
-        continueText.SetActive(false);
-    }
+        /// <summary>
+        /// Dimensï¿½o horizontal da grelha de simulaï¿½ï¿½o
+        /// </summary>
+        [SerializeField] private TextMeshProUGUI xdim;
+        /// <summary>
+        /// Dimensï¿½o vertical da grelha de simulaï¿½ï¿½o
+        /// </summary>
+        [SerializeField] private TextMeshProUGUI ydim;
+        /// <summary>
+        /// Taxa de troca
+        /// </summary>
+        [SerializeField] private Slider swap;
+        /// <summary>
+        /// Taxa de reproduï¿½ï¿½o
+        /// </summary>
+        [SerializeField] private Slider repr;
+        /// <summary>
+        /// Taxa de seleï¿½ï¿½o
+        /// </summary>
+        [SerializeField] private Slider sele;
 
-    /// <summary>
-    /// Método OnStartClick, corre quando se clica no butão Start
-    /// </summary>
-    public void OnStartClick()
-    {
-        args = 
-            ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
-        string result = c.CheckVars(args);
-        if (result == null)
+        /// <summary>
+        /// Variï¿½vel de tipo view para UI
+        /// </summary>
+        [SerializeField] private View ui;
+        
+        /// <summary>
+        /// Variï¿½vel de tipo GameObject para texto pausa do butï¿½o pausa
+        /// </summary>
+        [SerializeField] private GameObject pauseText;
+        /// <summary>
+        /// Variï¿½vel de tipo GameObject para texto continue do butï¿½o pausa
+        /// </summary>
+        [SerializeField] private GameObject continueText;
+
+        /// <summary>
+        /// Variï¿½vel do tipo Controller
+        /// </summary>
+        private Controller c;
+        /// <summary>
+        /// Array de argumentos
+        /// </summary>
+        private string[] args;
+
+        /// <summary>
+        /// Declara uma Thread 
+        /// </summary>
+        private Thread thread;
+
+        /// <summary>
+        /// Booleano que vai ser usado para colocar a simulï¿½ï¿½o em pausa
+        /// </summary>
+        private bool isPaused;
+
+        /// <summary>
+        /// Mï¿½todo Start, primeiro mï¿½todo a correr quando se inicia a simulaï¿½ï¿½o
+        /// </summary>
+        private void Start()
         {
-            thread = new Thread(StartGame);
-            thread.Start();
-        }
-    }
-
-    /// <summary>
-    /// Método ToArray, converte os valores das taxas para strings
-    /// </summary>
-    /// <param name="x">Posição em x</param>
-    /// <param name="y">Posição em y</param>
-    /// <param name="swap">Valor de taxa de troca</param>
-    /// <param name="repr">Valor de taxa de reprodução</param>
-    /// <param name="sele">Valor de taxa de seleção</param>
-    /// <returns></returns>
-    private string[] ToArray(string x, string y, double swap, double repr,
-        double sele) => new string[] { x, y, Convert.ToString(swap),
-            Convert.ToString(repr), Convert.ToString(sele) };
-
-    /// <summary>
-    /// Método StartGame, inicia a simulação
-    /// </summary>
-    private void StartGame()
-    {
-        c.StartGame(ui);
-    }
-
-    /// <summary>
-    /// Método OnPauseClick, corre quando se clica no butão Pause
-    /// </summary>
-    public void OnPauseClick()
-    {
-        // Verifica se a simulação está pausada
-        if (!isPaused)
-        {
-            thread.Suspend();
-            pauseText.SetActive(false);
-            continueText.SetActive(true);
-            Time.timeScale = 0;
-            isPaused = true;
-        }
-        else
-        {
-            thread.Resume();
+            c = new Controller();
+            isPaused = false;
             pauseText.SetActive(true);
             continueText.SetActive(false);
-            Time.timeScale = 1;
-            isPaused = false;
         }
-        
-    }
-    /// <summary>
-    /// Método OnStopClick, para a simulação quando se clica no butão Stop
-    /// </summary>
-    public void OnStopClick()
-    {
-        thread.Abort();
-    }
 
-    /// <summary>
-    /// Método OnQuitClick, fecha a aplicação quando se clica no butão Quit
-    /// </summary>
-    public void OnQuitClick()
-    {
-        Application.Quit();
+        /// <summary>
+        /// Mï¿½todo OnStartClick, corre quando se clica no butï¿½o Start
+        /// </summary>
+        public void OnStartClick()
+        {
+            args = 
+                ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
+            string result = c.CheckVars(args);
+            if (result == null)
+            {
+                thread = new Thread(StartGame);
+                thread.Start();
+            }
+        }
+
+        /// <summary>
+        /// Mï¿½todo ToArray, converte os valores das taxas para strings
+        /// </summary>
+        /// <param name="x">Posiï¿½ï¿½o em x</param>
+        /// <param name="y">Posiï¿½ï¿½o em y</param>
+        /// <param name="swap">Valor de taxa de troca</param>
+        /// <param name="repr">Valor de taxa de reproduï¿½ï¿½o</param>
+        /// <param name="sele">Valor de taxa de seleï¿½ï¿½o</param>
+        /// <returns></returns>
+        private string[] ToArray(string x, string y, double swap, double repr,
+            double sele) => new string[] { x, y, Convert.ToString(swap),
+                Convert.ToString(repr), Convert.ToString(sele) };
+
+        /// <summary>
+        /// Mï¿½todo StartGame, inicia a simulaï¿½ï¿½o
+        /// </summary>
+        private void StartGame()
+        {
+            c.StartGame(ui);
+        }
+
+        /// <summary>
+        /// Mï¿½todo OnPauseClick, corre quando se clica no butï¿½o Pause
+        /// </summary>
+        public void OnPauseClick()
+        {
+            // Verifica se a simulaï¿½ï¿½o estï¿½ pausada
+            if (!isPaused)
+            {
+                thread.Suspend();
+                pauseText.SetActive(false);
+                continueText.SetActive(true);
+                Time.timeScale = 0;
+                isPaused = true;
+            }
+            else
+            {
+                thread.Resume();
+                pauseText.SetActive(true);
+                continueText.SetActive(false);
+                Time.timeScale = 1;
+                isPaused = false;
+            }
+            
+        }
+        /// <summary>
+        /// Mï¿½todo OnStopClick, para a simulaï¿½ï¿½o quando se clica no butï¿½o Stop
+        /// </summary>
+        public void OnStopClick()
+        {
+            thread.Abort();
+        }
+
+        /// <summary>
+        /// Mï¿½todo OnQuitClick, fecha a aplicaï¿½ï¿½o quando se clica no butï¿½o Quit
+        /// </summary>
+        public void OnQuitClick()
+        {
+            Application.Quit();
+        }
     }
 }
 

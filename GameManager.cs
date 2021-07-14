@@ -48,7 +48,7 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método Start, inicia a simulação
+        /// Método Start, preenche o mapa
         /// </summary>
         /// <param name="ui">Variável do UI</param>
         public void Start(IView ui)
@@ -57,9 +57,9 @@ namespace LP2_RockPaperScissor.Common
         }
 
         /// <summary>
-        /// Método que faz o loop da simulação
+        /// Método devolve o mapa do jogo
         /// </summary>
-        /// <param name="ui">Variável do UI</param>
+        /// <returns>Mapa atual do jogo</returns>
         public Place[,] Map()
         {
             ExecuteEvents(GenerateEvents());

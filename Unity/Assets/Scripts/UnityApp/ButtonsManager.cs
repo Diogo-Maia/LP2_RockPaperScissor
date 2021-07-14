@@ -49,35 +49,25 @@ namespace LP2_RockPaperScissor.UnityApp
         /// Variavel de tipo Text para mostrar os erros
         /// </summary>
         [SerializeField] private Text log;
-
-        /// <summary>
-        /// Variavel de tipo Map usada para dar reset na textura
-        /// </summary>
-        private Map map;
         /// <summary>
         /// Variavel do tipo Controller
         /// </summary>
-        private Controller c;
+        [SerializeField] private Controller c;
         /// <summary>
         /// Array de argumentos
         /// </summary>
         private string[] args;
         /// <summary>
-        /// Declara uma Thread 
-        /// </summary>
-        private Thread thread;
-        /// <summary>
         /// Booleano que vai ser usado para colocar a simulcao em pausa
         /// </summary>
         private bool isPaused;
+
+        private bool stop;
         /// <summary>
         /// Metodo Start, primeiro metodo a correr quando se inicia a simulacao
         /// </summary>
         private void Start()
         {
-            c = new Controller();
-
-            map = GetComponent<Map>();
 
             isPaused = false;
 
@@ -96,11 +86,8 @@ namespace LP2_RockPaperScissor.UnityApp
             string result = c.CheckVars(args);
             if (result == null)
             {
-                thread = new Thread(StartGame);
-                map.CreateTexture
-                    (Convert.ToInt32(xdim.text), Convert.ToInt32(ydim.text));
-                map.SetSignal(true);
-                thread.Start();
+                ui.CreateTexture(Convert.ToInt32(xdim.text), Convert.ToInt32(ydim.text));
+                c.StartGame(ui);
             }
             else log.text = result;
         }
@@ -119,35 +106,28 @@ namespace LP2_RockPaperScissor.UnityApp
                 Convert.ToString(repr), Convert.ToString(sele) };
 
         /// <summary>
-        /// Metodo StartGame, inicia a simulacao
-        /// </summary>
-        private void StartGame()
-        {
-            c.StartGame(ui);
-        }
-
-        /// <summary>
         /// Metodo OnPauseClick, corre quando se clica no butao Pause
         /// </summary>
         public void OnPauseClick()
         {
             // Verifica se a simulacao esta na pausa
-            if (!isPaused)
+            if (!stop)
             {
-                thread.Suspend();
-                pauseText.SetActive(false);
-                continueText.SetActive(true);
-                Time.timeScale = 0;
-                isPaused = true;
-            }
-            else
-            {
-                thread.Resume();
-                pauseText.SetActive(true);
-                continueText.SetActive(false);
-                Time.timeScale = 1;
-                isPaused = false;
-            }
+                if (!isPaused)
+                {
+                    pauseText.SetActive(false);
+                    continueText.SetActive(true);
+                    c.SetPlay(false);
+                    isPaused = true;
+                }
+                else
+                {
+                    pauseText.SetActive(true);
+                    continueText.SetActive(false);
+                    c.SetPlay(true);
+                    isPaused = false;
+                }
+            }            
             
         }
         /// <summary>
@@ -155,9 +135,8 @@ namespace LP2_RockPaperScissor.UnityApp
         /// </summary>
         public void OnStopClick()
         {
-            map.SetSignal(false);
-            map.ResetTexture();
-            thread.Abort();
+            stop = true;
+            c.SetPlay(false);
         }
 
         /// <summary>

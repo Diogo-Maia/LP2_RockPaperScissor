@@ -1,3 +1,4 @@
+using UnityEngine;
 using LP2_RockPaperScissor.Common;
 
 namespace LP2_RockPaperScissor.UnityApp
@@ -5,7 +6,7 @@ namespace LP2_RockPaperScissor.UnityApp
     /// <summary>
     /// Classe Controller, implementa a interface IController
     /// </summary>
-    public class Controller : IController
+    public class Controller : MonoBehaviour, IController
     {
         /// <summary>
         /// Dimensoes horizontal e vertical da grelha ed simulacao
@@ -21,6 +22,16 @@ namespace LP2_RockPaperScissor.UnityApp
         /// Variavel do tipo GameManager
         /// </summary>
         private GameManager game;
+
+        /// <summary>
+        /// Variavel do tipo Iview para armazenar a ui
+        /// </summary>
+        private IView ui;
+
+        /// <summary>
+        /// Variavel bool, usada para ver se o jogo pode preceguir
+        /// </summary>
+        private bool play;
 
         /// <summary>
         /// Metodo CheckVars
@@ -75,10 +86,33 @@ namespace LP2_RockPaperScissor.UnityApp
         /// <param name="ui"></param>
         public void StartGame(IView ui)
         {
+            this.ui = ui;
+
             game = new GameManager(xdim, ydim,
                 swap_rate_exp, repr_rate_exp, selc_rate_exp);
 
             game.Start(ui);
+            play = true;
+        }
+
+        /// <summary>
+        /// Metodo usado para defenir a variavel play
+        /// </summary>
+        /// <param name="set">Estado em que fica a variavel</param>
+        public void SetPlay(bool set)
+        {
+            play = set;
+        }
+
+        /// <summary>
+        /// Metodo Update do Unity
+        /// </summary>
+        private void Update()
+        {
+            if (play)
+            {
+                ui.MapView(game.Map(), xdim, ydim);
+            }
         }
     }
 }

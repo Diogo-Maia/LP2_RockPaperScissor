@@ -23,6 +23,8 @@ namespace ConsoleApp
         /// </summary>
         private GameManager game;
 
+        private Place[,] map;
+
         /// <summary>
         /// Método para verificar se o valor inserido está dentro dos limites
         /// impostos
@@ -93,6 +95,19 @@ namespace ConsoleApp
                 swap_rate_exp, repr_rate_exp, selc_rate_exp);
 
             game.Start(ui);
+            GameLoop(ui);
+        }
+
+        /// <summary>
+        /// GameLoop do jogo
+        /// </summary>
+        /// <param name="ui"></param>
+        private void GameLoop(IView ui)
+        {
+            while (true)
+            {
+                ui.MapView(game.Map(), xdim, ydim);
+            }
         }
     }
 }

@@ -2432,6 +2432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xdim: 0
   ydim: 0
+  rawImage: {fileID: 1225580216}
 --- !u!114 &1116776243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2453,6 +2454,7 @@ MonoBehaviour:
   pauseText: {fileID: 1675749461}
   continueText: {fileID: 834565137}
   log: {fileID: 1272865087}
+  c: {fileID: 1116776244}
 --- !u!114 &1116776244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2462,10 +2464,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116776237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f959e20651b8d084a8d32071cfcc10b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f46df9af42e9e546906cde3f104e81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImage: {fileID: 1225580216}
 --- !u!1 &1126486290
 GameObject:
   m_ObjectHideFlags: 0

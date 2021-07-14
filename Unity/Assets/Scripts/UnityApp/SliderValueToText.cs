@@ -12,13 +12,14 @@ namespace LP2_RockPaperScissor.UnityApp
         /// <summary>
         /// Slider
         /// </summary>
-        [SerializeField]
-        private Slider sliderUI;
-
+        [SerializeField] private Slider sliderUI;
         /// <summary>
         /// Texto com o valor do slider
         /// </summary>
         private TMPro.TextMeshProUGUI textSliderValue;
+        /// <summary>
+        /// Variavel usada para armazenar o valor do slider
+        /// </summary>
         private string sliderMessage;
 
         /// <summary>

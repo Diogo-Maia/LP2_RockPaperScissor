@@ -45,7 +45,7 @@ namespace LP2_RockPaperScissor.UnityApp
         /// </summary>
         void Update()
         {
-            if (v.map != null && signal)
+            /*if (v.map != null && signal)
             {
                 if (texture != null && signal)
                 {
@@ -73,7 +73,7 @@ namespace LP2_RockPaperScissor.UnityApp
                         }
                     }
                 }
-            }
+            }*/
         }
 
         /// <summary>

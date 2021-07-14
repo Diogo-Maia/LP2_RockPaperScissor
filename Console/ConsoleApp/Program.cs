@@ -19,7 +19,11 @@ namespace ConsoleApp
             string status = c.CheckVars(args);
 
             if (status == null) c.StartGame(ui);
-            else Console.WriteLine(status);
+            else
+            {
+                Console.WriteLine(status);
+                Console.ReadKey();
+            }
         }
     }
 }

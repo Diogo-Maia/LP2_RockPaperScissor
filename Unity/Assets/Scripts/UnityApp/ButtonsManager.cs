@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
-using LP2_RockPaperScissor.UnityApp;
 using TMPro;
 using System;
 
@@ -34,45 +33,54 @@ namespace LP2_RockPaperScissor.UnityApp
         [SerializeField] private Slider sele;
 
         /// <summary>
-        /// Vari�vel de tipo view para UI
+        /// Variavel de tipo view para UI
         /// </summary>
         [SerializeField] private View ui;
         
         /// <summary>
-        /// Vari�vel de tipo GameObject para texto pausa do but�o pausa
+        /// Variavel de tipo GameObject para texto pausa do but�o pausa
         /// </summary>
         [SerializeField] private GameObject pauseText;
         /// <summary>
-        /// Vari�vel de tipo GameObject para texto continue do but�o pausa
+        /// Variavel de tipo GameObject para texto continue do butao pausa
         /// </summary>
         [SerializeField] private GameObject continueText;
+        /// <summary>
+        /// Variavel de tipo Text para mostrar os erros
+        /// </summary>
+        [SerializeField] private Text log;
 
         /// <summary>
-        /// Vari�vel do tipo Controller
+        /// Variavel de tipo Map usada para dar reset na textura
+        /// </summary>
+        private Map map;
+        /// <summary>
+        /// Variavel do tipo Controller
         /// </summary>
         private Controller c;
         /// <summary>
         /// Array de argumentos
         /// </summary>
         private string[] args;
-
         /// <summary>
         /// Declara uma Thread 
         /// </summary>
         private Thread thread;
-
         /// <summary>
         /// Booleano que vai ser usado para colocar a simul��o em pausa
         /// </summary>
         private bool isPaused;
-
         /// <summary>
         /// M�todo Start, primeiro m�todo a correr quando se inicia a simula��o
         /// </summary>
         private void Start()
         {
             c = new Controller();
+
+            map = GetComponent<Map>();
+
             isPaused = false;
+
             pauseText.SetActive(true);
             continueText.SetActive(false);
         }
@@ -83,13 +91,18 @@ namespace LP2_RockPaperScissor.UnityApp
         public void OnStartClick()
         {
             args = 
-                ToArray(xdim.text, ydim.text, swap.value, repr.value, sele.value);
+                ToArray
+                (xdim.text, ydim.text, swap.value, repr.value, sele.value);
             string result = c.CheckVars(args);
             if (result == null)
             {
                 thread = new Thread(StartGame);
+                map.CreateTexture
+                    (Convert.ToInt32(xdim.text), Convert.ToInt32(ydim.text));
+                map.SetSignal(true);
                 thread.Start();
             }
+            else log.text = result;
         }
 
         /// <summary>
@@ -142,6 +155,8 @@ namespace LP2_RockPaperScissor.UnityApp
         /// </summary>
         public void OnStopClick()
         {
+            map.SetSignal(false);
+            map.ResetTexture();
             thread.Abort();
         }
 

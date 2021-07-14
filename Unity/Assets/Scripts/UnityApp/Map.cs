@@ -27,12 +27,18 @@ namespace LP2_RockPaperScissor.UnityApp
         private Texture2D texture;
 
         /// <summary>
+        /// Variavel do tipo bool, usada para ver se pode mostrar o mapa ou nao
+        /// </summary>
+        private bool signal;
+
+        /// <summary>
         /// Método Start, inicia a simulação
         /// </summary>
         // Start is called before the first frame update
         void Start()
         {
             v = GetComponent<View>();
+            signal = false;
         }
 
         /// <summary>
@@ -41,9 +47,9 @@ namespace LP2_RockPaperScissor.UnityApp
         // Update is called once per frame
         void Update()
         {
-            if (v.map != null) 
+            if (v.map != null && signal)
             {
-                if (texture != null)
+                if (texture != null && signal)
                 {
                     for (int x = 0; x < v.map.GetLength(0); x++)
                     {
@@ -69,17 +75,37 @@ namespace LP2_RockPaperScissor.UnityApp
                         }
                     }
                 }
-                else CreateTexture();
             }
         }
 
         /// <summary>
         /// Método CreateTexture, desenha a textura numa RawImage do unity UI
         /// </summary>
-        private void CreateTexture()
+        public void CreateTexture(int x, int y)
         {
-            texture = new Texture2D(v.xdim, v.ydim);
-            texture.filterMode = FilterMode.Point;
+            ResetTexture();
+            texture = new Texture2D(x, y)
+            {
+                filterMode = FilterMode.Point
+            };
+        }
+
+        /// <summary>
+        /// Método ResetTexture, dá reset na textura
+        /// </summary>
+        public void ResetTexture()
+        {
+            rawImage.texture = new Texture2D(1, 1);
+            texture = null;
+        }
+
+        /// <summary>
+        /// Metodo SetSignal, altera o valor do signal
+        /// </summary>
+        /// <param name="signal"></param>
+        public void SetSignal(bool signal)
+        {
+            this.signal = signal;
         }
     }
 }

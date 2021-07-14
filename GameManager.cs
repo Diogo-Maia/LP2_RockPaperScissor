@@ -54,21 +54,16 @@ namespace LP2_RockPaperScissor.Common
         public void Start(IView ui)
         {
             FillMap();
-            GameLoop(ui);
         }
 
         /// <summary>
         /// Método que faz o loop da simulação
         /// </summary>
         /// <param name="ui">Variável do UI</param>
-        private void GameLoop(IView ui)
+        public Place[,] Map()
         {
-            while (true)
-            {
-                ExecuteEvents(GenerateEvents());
-
-                ui.MapView(map, xdim, ydim);
-            }
+            ExecuteEvents(GenerateEvents());
+            return map;
         }
 
         /// <summary>

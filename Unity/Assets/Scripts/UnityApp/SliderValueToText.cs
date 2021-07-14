@@ -22,7 +22,7 @@ namespace LP2_RockPaperScissor.UnityApp
         private string sliderMessage;
 
         /// <summary>
-        /// Método Start, altera texto de cada valor selecionado no slider
+        /// Metodo Start, altera texto de cada valor selecionado no slider
         /// </summary>
         void Start()
         {
@@ -31,7 +31,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// Método ShowSliderValue, desenha o texto da legenda
+        /// Metodo ShowSliderValue, desenha o texto da legenda
         /// </summary>
         public void ShowSliderValue()
         {

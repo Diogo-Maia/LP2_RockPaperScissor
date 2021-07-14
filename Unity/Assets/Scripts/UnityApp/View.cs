@@ -9,22 +9,22 @@ namespace LP2_RockPaperScissor.UnityApp
     public class View : MonoBehaviour, IView
     {
         /// <summary>
-        /// Array que guarda informação das posições no mapa
+        /// Array que guarda informacao das posicoes no mapa
         /// </summary>
         public Place[,] map;
         /// <summary>
-        /// Dimensões horizontal e vertical da grelha de simulação
+        /// Dimensoes horizontal e vertical da grelha de simulacao
         /// </summary>
         public int xdim, ydim;
 
         /// <summary>
-        /// Método MapView
+        /// Metodo MapView
         /// </summary>
-        /// <param name="map">Array que guarda a informação das posições na
-        /// grelha de simulação</param>
-        /// <param name="xdim">Dimensão horizontal da grelha de simulação
+        /// <param name="map">Array que guarda a informacao das posicoes na
+        /// grelha de simulcao</param>
+        /// <param name="xdim">Dimensao horizontal da grelha de simulacao
         /// </param>
-        /// <param name="ydim">Dimensão vertical da grelha de simulação
+        /// <param name="ydim">Dimensao vertical da grelha de simulacao
         /// </param>
         public void MapView(Place[,] map, int xdim, int ydim)
         {

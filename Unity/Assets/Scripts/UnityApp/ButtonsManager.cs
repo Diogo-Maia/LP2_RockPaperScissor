@@ -12,11 +12,11 @@ namespace LP2_RockPaperScissor.UnityApp
     public class ButtonsManager : MonoBehaviour
     {
         /// <summary>
-        /// Dimens�o horizontal da grelha de simula��o
+        /// Dimensao horizontal da grelha de simulacao
         /// </summary>
         [SerializeField] private TextMeshProUGUI xdim;
         /// <summary>
-        /// Dimens�o vertical da grelha de simula��o
+        /// Dimensao vertical da grelha de simulacao
         /// </summary>
         [SerializeField] private TextMeshProUGUI ydim;
         /// <summary>
@@ -24,11 +24,11 @@ namespace LP2_RockPaperScissor.UnityApp
         /// </summary>
         [SerializeField] private Slider swap;
         /// <summary>
-        /// Taxa de reprodu��o
+        /// Taxa de reproducao
         /// </summary>
         [SerializeField] private Slider repr;
         /// <summary>
-        /// Taxa de sele��o
+        /// Taxa de selecao
         /// </summary>
         [SerializeField] private Slider sele;
 
@@ -38,7 +38,7 @@ namespace LP2_RockPaperScissor.UnityApp
         [SerializeField] private View ui;
         
         /// <summary>
-        /// Variavel de tipo GameObject para texto pausa do but�o pausa
+        /// Variavel de tipo GameObject para texto pausa do butao pausa
         /// </summary>
         [SerializeField] private GameObject pauseText;
         /// <summary>
@@ -67,11 +67,11 @@ namespace LP2_RockPaperScissor.UnityApp
         /// </summary>
         private Thread thread;
         /// <summary>
-        /// Booleano que vai ser usado para colocar a simul��o em pausa
+        /// Booleano que vai ser usado para colocar a simulcao em pausa
         /// </summary>
         private bool isPaused;
         /// <summary>
-        /// M�todo Start, primeiro m�todo a correr quando se inicia a simula��o
+        /// Metodo Start, primeiro metodo a correr quando se inicia a simulacao
         /// </summary>
         private void Start()
         {
@@ -86,7 +86,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// M�todo OnStartClick, corre quando se clica no but�o Start
+        /// Metodo OnStartClick, corre quando se clica no butao Start
         /// </summary>
         public void OnStartClick()
         {
@@ -106,20 +106,20 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// M�todo ToArray, converte os valores das taxas para strings
+        /// Metodo ToArray, converte os valores das taxas para strings
         /// </summary>
-        /// <param name="x">Posi��o em x</param>
-        /// <param name="y">Posi��o em y</param>
+        /// <param name="x">Posicao em x</param>
+        /// <param name="y">Posicao em y</param>
         /// <param name="swap">Valor de taxa de troca</param>
-        /// <param name="repr">Valor de taxa de reprodu��o</param>
-        /// <param name="sele">Valor de taxa de sele��o</param>
+        /// <param name="repr">Valor de taxa de reproducao</param>
+        /// <param name="sele">Valor de taxa de selecao</param>
         /// <returns></returns>
         private string[] ToArray(string x, string y, double swap, double repr,
             double sele) => new string[] { x, y, Convert.ToString(swap),
                 Convert.ToString(repr), Convert.ToString(sele) };
 
         /// <summary>
-        /// M�todo StartGame, inicia a simula��o
+        /// Metodo StartGame, inicia a simulacao
         /// </summary>
         private void StartGame()
         {
@@ -127,11 +127,11 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// M�todo OnPauseClick, corre quando se clica no but�o Pause
+        /// Metodo OnPauseClick, corre quando se clica no butao Pause
         /// </summary>
         public void OnPauseClick()
         {
-            // Verifica se a simula��o est� pausada
+            // Verifica se a simulacao esta na pausa
             if (!isPaused)
             {
                 thread.Suspend();
@@ -151,7 +151,7 @@ namespace LP2_RockPaperScissor.UnityApp
             
         }
         /// <summary>
-        /// M�todo OnStopClick, para a simula��o quando se clica no but�o Stop
+        /// Metodo OnStopClick, para a simulacao quando se clica no butao Stop
         /// </summary>
         public void OnStopClick()
         {
@@ -161,7 +161,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// M�todo OnQuitClick, fecha a aplica��o quando se clica no but�o Quit
+        /// Metodo OnQuitClick, fecha a aplicacao quando se clica no butao Quit
         /// </summary>
         public void OnQuitClick()
         {

@@ -10,18 +10,18 @@ namespace LP2_RockPaperScissor.UnityApp
     public class Map : MonoBehaviour
     {
         /// <summary>
-        /// Variável do tipo RawImage, usada para desenhar a grelha no canvas
+        /// Variavel do tipo RawImage, usada para desenhar a grelha no canvas
         /// do unity
         /// </summary>
         [SerializeField] private RawImage rawImage;
 
         /// <summary>
-        /// Variàvel do tipo View
+        /// Variavel do tipo View
         /// </summary>
         private View v;
 
         /// <summary>
-        /// Variável do tipo Texture2D, usada para desenhar a grelha no canvas
+        /// Variavel do tipo Texture2D, usada para desenhar a grelha no canvas
         /// do unity
         /// </summary>
         private Texture2D texture;
@@ -32,9 +32,8 @@ namespace LP2_RockPaperScissor.UnityApp
         private bool signal;
 
         /// <summary>
-        /// Método Start, inicia a simulação
+        /// Metodo Start, inicia a simulacao
         /// </summary>
-        // Start is called before the first frame update
         void Start()
         {
             v = GetComponent<View>();
@@ -42,9 +41,8 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// Método Update, atualiza cada frame da simulação
+        /// Metodo Update, atualiza cada frame da simulacao
         /// </summary>
-        // Update is called once per frame
         void Update()
         {
             if (v.map != null && signal)
@@ -79,7 +77,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// Método CreateTexture, desenha a textura numa RawImage do unity UI
+        /// Metodo CreateTexture, desenha a textura numa RawImage do unity UI
         /// </summary>
         public void CreateTexture(int x, int y)
         {
@@ -91,7 +89,7 @@ namespace LP2_RockPaperScissor.UnityApp
         }
 
         /// <summary>
-        /// Método ResetTexture, dá reset na textura
+        /// Metodo ResetTexture, faz reset na textura
         /// </summary>
         public void ResetTexture()
         {
